@@ -10,11 +10,14 @@
     "format": "prettier --config .prettierrc --write --plugin-search-dir=. src/**/*.{html,js,ts,svelte}"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-commonjs": "22.0.0",
+    "@rollup/plugin-node-resolve": "13.3.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "axios": "0.27.2",
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",
-    "rollup": "^2.3.4",
+    "rollup": "2.75.3",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
@@ -22,10 +25,8 @@
     "svelte": "^3.0.0",
     "svelte-check": "^2.0.0",
     "svelte-preprocess": "^4.0.0",
-    "@rollup/plugin-typescript": "^8.0.0",
-    "typescript": "^4.7.2",
     "tslib": "^2.0.0",
-    "@tsconfig/svelte": "^2.0.0"
+    "typescript": "^4.7.2"
   },
   "dependencies": {
     "sirv-cli": "^2.0.0"
