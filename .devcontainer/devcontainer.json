@@ -1,0 +1,17 @@
+{
+	"name": "Svelte VSCode Remote Container",
+	"dockerFile": "Dockerfile",
+	"appPort": [35729, 8081],
+	"containerEnv": {
+		"HOST": "0.0.0.0",
+		"PORT": "8081",
+		"CHOKIDAR_USEPOLLING": "true"
+	},
+	"runArgs": ["-u", "node"],
+	"settings": {
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"postCreateCommand": "yarn install",
+	"extensions": ["svelte.svelte-vscode", "esbenp.prettier-vscode"]
+}
