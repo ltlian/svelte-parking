@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ParkeringReportElement from './ParkeringReportElement.svelte';
 
-	export let items: ParkeringReportItem[];
+	export let items: ParkingAvailabilityRecord[];
 </script>
 
 <h3>Antall ledige plasser</h3>
@@ -15,7 +15,7 @@
 </ul>
 
 {#if items && items.length}
-	<p>Sist oppdatert {items[0].Klokkeslett}</p>
+	<p>Sist oppdatert {items[0].timestamp}</p>
 {/if}
 
 <style>

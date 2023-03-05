@@ -1,18 +1,22 @@
 import axios from 'axios';
-import stavangerParkeringConfig from './datasets/stavanger-parkering/config';
+import { statsMonAzureConfig } from './datasets/stavanger-parkering/config';
 
 export interface openComConfig {
+	baseUrl: string;
 	url: string;
 }
 
 const api = axios.create({
-	baseURL: 'https://opencom.no/dataset'
+	baseURL: statsMonAzureConfig.baseUrl,
+	headers: {
+		Accept: 'application/json'
+	}
 });
 
 export async function getParking() {
-	let response = await api.get(stavangerParkeringConfig.url);
+	let response = await api.get(statsMonAzureConfig.url);
 	if (response.status == 200) {
-		return response.data as ParkeringReportItem[];
+		return response.data as ParkingAvailabilityRecord[];
 	} else {
 		throw new Error(response.statusText);
 	}

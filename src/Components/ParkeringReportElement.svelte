@@ -1,18 +1,18 @@
 <script lang="ts">
-	export let item: ParkeringReportItem;
+	export let item: ParkingAvailabilityRecord;
 </script>
 
 <div>
 	<span>
 		<a
-			href="https://www.google.com/maps/search/?api=1&query={item.Latitude}%2C{item.Longitude}"
+			href="https://www.google.com/maps/search/?api=1&query={item.coordinates.latitude}%2C{item.coordinates.longitude}"
 			title="Vis i google maps"
 		>
-			{item.Sted}
+			{item.area}
 		</a>
 	</span>
 	<span>
-		{item.Antall_ledige_plasser}
+		{item.availableSpaces}
 	</span>
 </div>
 
