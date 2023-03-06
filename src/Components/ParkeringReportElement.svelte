@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ParkingAvailabilityRecord } from "../datasets/stavanger-parkering/ParkingAvailabilityRecord";
 	export let item: ParkingAvailabilityRecord;
 </script>
 

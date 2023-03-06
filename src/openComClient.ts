@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { statsMonAzureConfig } from './datasets/stavanger-parkering/config';
+import type { ParkingAvailabilityRecord } from './datasets/stavanger-parkering/ParkingAvailabilityRecord';
 
 export interface openComConfig {
 	baseUrl: string;
