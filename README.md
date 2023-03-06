@@ -1,5 +1,9 @@
 # svelte-parking
 
+See the running version here. Maybe.
+
+https://icy-river-00c658503.1.azurestaticapps.net/
+
 ## Get started
 
 Install dependencies
@@ -9,7 +13,7 @@ cd svelte-parking
 yarn install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+...then start [Vite](https://vitejs.dev):
 
 ```bash
 yarn run dev
