@@ -6,7 +6,7 @@
 <div>
 	<span>
 		<a
-			href="https://www.google.com/maps/search/?api=1&query={item.coordinates.latitude}%2C{item.coordinates.longitude}"
+			href="https://www.google.com/maps/search/?api=1&query={item.coordinates.lat}%2C{item.coordinates.lon}"
 			title="Vis i google maps"
 		>
 			{item.area}
