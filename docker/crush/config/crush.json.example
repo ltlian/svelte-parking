@@ -1,0 +1,88 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "models": {
+    "large": {
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek"
+    },
+    "small": {
+      "model": "deepseek-v4-flash",
+      "provider": "deepseek"
+    }
+  },
+  "providers": {
+    "deepseek": {
+      "type": "openai-compat",
+      "base_url": "https://api.deepseek.com/v1",
+      "api_key": "$DEEPSEEK_API_KEY",
+      "models": [
+        {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro",
+          "cost_per_1m_in": 1.74,
+          "cost_per_1m_out": 3.48,
+          "cost_per_1m_in_cached": 0.0145,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 1048576,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        },
+        {
+          "id": "deepseek-v4-flash",
+          "name": "DeepSeek V4 Flash",
+          "cost_per_1m_in": 0.14,
+          "cost_per_1m_out": 0.28,
+          "cost_per_1m_in_cached": 0.0028,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 1048576,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        }
+      ]
+    }
+  },
+  "mcp": {
+    "tavily": {
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${TAVILY_API_KEY}"
+      }
+    }
+  },
+  "permissions": {
+    "allowed_tools": [
+      "view",
+      "ls",
+      "glob",
+      "grep",
+      "edit",
+      "multiedit",
+      "write",
+      "bash",
+      "fetch",
+      "agentic_fetch",
+      "agent",
+      "download",
+      "todos",
+      "crush_info",
+      "crush_logs",
+      "sourcegraph",
+      "lsp_diagnostics",
+      "lsp_references",
+      "lsp_restart",
+      "job_output",
+      "job_kill"
+    ]
+  },
+  "options": {
+    "data_directory": "/home/agent/.local/share/crush",
+    "auto_lsp": true,
+    "attribution": {
+      "trailer_style": "assisted-by",
+      "generated_with": true
+    }
+  }
+}

@@ -1,0 +1,22 @@
+services:
+  crush:
+    build:
+      context: .
+    image: svelte-parking-crush:latest
+    restart: unless-stopped
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-}
+      - PORT=8081
+      - HOST=0.0.0.0
+    ports:
+      - "${HOST_DEV_PORT:-8081}:8081"
+    volumes:
+      - ../../:/workspace
+      - crush-node-modules:/workspace/node_modules
+      - crush-data:/home/agent/.local/share/crush
+      - crush-config:/home/agent/.config/crush
+
+volumes:
+  crush-node-modules:
+  crush-data:
+  crush-config:
