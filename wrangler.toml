@@ -7,6 +7,7 @@ command = "sed -i \"s/GIT_COMMIT/$(git rev-parse --short HEAD)/\" public/index.h
 
 [assets]
 directory = "./public"
+binding = "ASSETS"
 
 [vars]
 PARKING_API_URL = "https://statsmon-api.azurewebsites.net/parkingAvailability"
