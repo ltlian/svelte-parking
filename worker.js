@@ -2,6 +2,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Redirect bare route prefix to add trailing slash so relative
+    // asset URLs (global.css, app.js) resolve correctly.
+    if (env.ROUTE_PREFIX && url.pathname === env.ROUTE_PREFIX) {
+      return Response.redirect(env.ROUTE_PREFIX + '/', 301);
+    }
+
     if (url.pathname.endsWith('/api/parkingAvailability')) {
       const upstream = await fetch(env.PARKING_API_URL);
       if (!upstream.ok) {
