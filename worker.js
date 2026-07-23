@@ -2,7 +2,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    if (url.pathname === '/api/parkingAvailability') {
+    if (url.pathname.endsWith('/api/parkingAvailability')) {
       const upstream = await fetch(env.PARKING_API_URL);
       if (!upstream.ok) {
         return new Response(upstream.body, {
@@ -18,7 +18,6 @@ export default {
       });
     }
 
-    // Other paths fall through to static assets from public/
-    return new Response('Not Found', { status: 404 });
+    return env.ASSETS.fetch(request);
   }
 };
