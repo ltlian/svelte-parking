@@ -2,13 +2,14 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Redirect bare route prefix to add trailing slash so relative
-    // asset URLs (global.css, app.js) resolve correctly.
-    if (env.ROUTE_PREFIX && url.pathname === env.ROUTE_PREFIX) {
-      return Response.redirect(env.ROUTE_PREFIX + '/', 301);
+    // Strip route prefix (e.g. /parking) so routing and asset serving
+    // operate against the root of the assets directory.
+    let pathname = url.pathname;
+    if (env.ROUTE_PREFIX && pathname.startsWith(env.ROUTE_PREFIX)) {
+      pathname = pathname.slice(env.ROUTE_PREFIX.length) || '/';
     }
 
-    if (url.pathname.endsWith('/api/parkingAvailability')) {
+    if (pathname === '/api/parkingAvailability') {
       const upstream = await fetch(env.PARKING_API_URL);
       if (!upstream.ok) {
         return new Response(upstream.body, {
@@ -24,14 +25,8 @@ export default {
       });
     }
 
-    // Strip the route prefix (e.g. /parking) so the assets fetcher can
-    // resolve files at the root of the assets directory.
-    if (env.ROUTE_PREFIX && url.pathname.startsWith(env.ROUTE_PREFIX)) {
-      const stripped = new URL(request.url);
-      stripped.pathname = url.pathname.slice(env.ROUTE_PREFIX.length) || '/';
-      return env.ASSETS.fetch(stripped);
-    }
-
-    return env.ASSETS.fetch(request);
+    const assetUrl = new URL(request.url);
+    assetUrl.pathname = pathname;
+    return env.ASSETS.fetch(assetUrl);
   }
 };
