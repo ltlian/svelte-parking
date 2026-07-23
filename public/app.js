@@ -1,4 +1,4 @@
-const API_PATH = '/api/parkingAvailability';
+const API_PATH = 'api/parkingAvailability';
 const FETCH_TIMEOUT_MS = 90_000;
 
 async function fetchParking(signal) {
