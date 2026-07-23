@@ -18,6 +18,14 @@ export default {
       });
     }
 
+    // Strip the route prefix (e.g. /parking) so the assets fetcher can
+    // resolve files at the root of the assets directory.
+    if (env.ROUTE_PREFIX && url.pathname.startsWith(env.ROUTE_PREFIX)) {
+      const stripped = new URL(request.url);
+      stripped.pathname = url.pathname.slice(env.ROUTE_PREFIX.length) || '/';
+      return env.ASSETS.fetch(stripped);
+    }
+
     return env.ASSETS.fetch(request);
   }
 };

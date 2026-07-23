@@ -11,3 +11,4 @@ binding = "ASSETS"
 
 [vars]
 PARKING_API_URL = "https://statsmon-api.azurewebsites.net/parkingAvailability"
+ROUTE_PREFIX = "/parking"
