@@ -96,6 +96,13 @@ li {
   margin: 0 0 0.5em;
 }
 
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  opacity: 0.4;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     color: #c9d1d9;
