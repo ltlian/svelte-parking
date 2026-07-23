@@ -1,0 +1,9 @@
+name = "svelte-parking"
+main = "worker.js"
+compatibility_date = "2025-07-23"
+
+[assets]
+directory = "./public"
+
+[vars]
+PARKING_API_URL = "https://statsmon-api.azurewebsites.net/parkingAvailability"
