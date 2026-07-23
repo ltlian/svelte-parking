@@ -11,11 +11,9 @@ The container has passwordless sudo and apt available.
 
 ## Project
 
-This is a Svelte frontend app built with Rollup and TypeScript. The
-Rollup dev server (sirv) runs on port 8081 and is exposed to the host.
+This is a static HTML/JS frontend with zero build dependencies. Serve
+the `public/` directory to preview — no install or build step needed.
 
-Run `npm install` after first starting the container, then:
-- Dev server: `npm run dev`
-- Build: `npm run build`
-- Typecheck: `npm run check`
-- Format: `npm run format`
+```bash
+python3 -m http.server -d public
+```

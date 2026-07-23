@@ -1,52 +1,37 @@
 # svelte-parking
 
-See the running version here. Maybe.
+A simple static page showing available parking spots in Stavanger, fetched
+from an API proxied through a Cloudflare Pages Function.
 
-https://icy-river-00c658503.1.azurestaticapps.net/
+## Development
 
-## Get started
+Copy `.dev.vars.example` to `.dev.vars` (already gitignored) and adjust if
+the API URL differs from the default.
 
-Install dependencies
-
-```bash
-cd svelte-parking
-yarn install
-```
-
-...then start [Vite](https://vitejs.dev):
+Serve with Cloudflare's dev server:
 
 ```bash
-yarn run dev
+npx wrangler pages dev public
 ```
 
-Navigate to [localhost:8080](http://localhost:8080).
-
-## Dockerized development (Crush agent)
-
-A sandboxed dev environment with the [Crush](https://charm.land/crush) coding
-agent pre-installed.
-
-### Setup
+Or without the function (API path won't resolve — CORS permitting, you can
+point `API_PATH` directly at the real URL for quick testing):
 
 ```bash
-cp docker/crush/.env.example docker/crush/.env
-# Edit docker/crush/.env and set DEEPSEEK_API_KEY
+python3 -m http.server -d public
 ```
 
-### Build and launch
+## Deployment
 
-```bash
-docker compose -f docker/crush/compose.yaml up -d --build
-```
+The project is a Cloudflare Pages site with a single Function
+(`functions/api/parkingAvailability.js`) that proxies requests to the
+upstream API. The upstream URL is injected via a Cloudflare Pages
+environment variable — never hardcoded in source.
 
-### Exec into the container
-
-```bash
-docker compose -f docker/crush/compose.yaml exec crush bash
-```
-
-Inside the container, the workspace is at `/workspace` (bind-mounted from the
-project root). Run `npm install` on first use, then `npm run dev`.
+1. Connect the GitHub repo to Cloudflare Pages
+2. Build settings: no build command, output directory `public`
+3. Add environment variable in the Cloudflare dashboard:
+   - `PARKING_API_URL` = `https://statsmon-api.azurewebsites.net/parkingAvailability`
 
 ## AI Usage
 
@@ -58,8 +43,4 @@ human developer before being included.
 | :--- | :--- | :--- | :--- |
 | Crush | DeepSeek | Yes — code generation, refactoring, testing, and documentation | No |
 
-First AI-assisted commit: *TBD*
-
-## Svelte
-
-https://svelte.dev/
+First AI-assisted commit: `6ce99e1`
