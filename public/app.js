@@ -10,7 +10,7 @@ async function fetchParking(signal) {
 }
 
 function formatTimestamp(iso) {
-  return new Date(iso).toLocaleString(undefined, {
+  return new Date(iso).toLocaleString('nb-NO', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
