@@ -3,7 +3,7 @@ main = "worker.js"
 compatibility_date = "2025-07-23"
 
 [build]
-command = "sed -i \"s/GIT_COMMIT/$(git rev-parse --short HEAD)/\" public/index.html"
+command = "sed -i \"s/__COMMIT_HASH__/$(git rev-parse --short HEAD)/\" public/index.html"
 
 [assets]
 directory = "./public"
