@@ -58,6 +58,7 @@ WORKDIR /workspace
 
 ENV EDITOR=vim
 ENV COLORTERM=truecolor
+ENV LANG=C.UTF-8
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
