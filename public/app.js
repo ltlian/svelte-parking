@@ -1,6 +1,15 @@
 const API_PATH = 'api/parkingAvailability';
 const FETCH_TIMEOUT_MS = 90_000;
 
+const STATUS_MESSAGES = [
+  'Et øyeblikk...',
+  'Snart klar...',
+];
+
+let loadingInterval = null;
+let loadingStartTime = null;
+let currentMessage = 'Henter data';
+
 async function fetchParking(signal) {
   const response = await fetch(API_PATH, { signal });
   if (!response.ok) {
@@ -47,8 +56,29 @@ function renderItems(items) {
 }
 
 function showLoading() {
+  loadingStartTime = Date.now();
+  currentMessage = 'Henter data';
   document.getElementById('app').innerHTML =
-    '<p class="loading">Henter data<span class="spinner"></span></p>';
+    '<p class="loading"><span id="loading-msg"></span><span class="spinner"></span></p>';
+  updateLoading();
+  loadingInterval = setInterval(updateLoading, 1000);
+}
+
+function stopLoading() {
+  if (loadingInterval) {
+    clearInterval(loadingInterval);
+    loadingInterval = null;
+  }
+}
+
+function updateLoading() {
+  const msgEl = document.getElementById('loading-msg');
+  if (!msgEl) return;
+  const elapsed = Math.floor((Date.now() - loadingStartTime) / 1000);
+  if (elapsed >= 10 && elapsed % 10 === 0) {
+    currentMessage = STATUS_MESSAGES[Math.floor(Math.random() * STATUS_MESSAGES.length)];
+  }
+  msgEl.textContent = `${currentMessage} (${elapsed}s) `;
 }
 
 function showError(err) {
@@ -74,9 +104,11 @@ async function load() {
   try {
     const items = await fetchParking(controller.signal);
     clearTimeout(timeout);
+    stopLoading();
     document.getElementById('app').innerHTML = renderItems(items);
   } catch (err) {
     clearTimeout(timeout);
+    stopLoading();
     if (err.name === 'AbortError') {
       showError(new Error('Forespørselen tok for lang tid. Pr\u00F8v igjen.'));
     } else {
